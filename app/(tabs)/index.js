@@ -10,20 +10,27 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
+// formik import for the form
 import { Formik } from 'formik';
+// importing datepicker
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Yup from 'yup';
 
 export default function HomeScreen() {
+  // state for loader
   const [loading, setLoading] = useState(false);
+  //state for showing date picker
   const [showDatePicker, setShowDatePicker] = useState(false);
 
+
+   // validation schema 
   const handlevalidate = Yup.object().shape({
     fullName: Yup.string().required('Full Name is required'),
     email: Yup.string().email('Invalid email').required('Email is required'),
     bookingDate: Yup.string().required('Booking Date is required'),
   });
-
+ 
+  // handling the form submit 
   const handleSubmit = (values, { resetForm }) => {
     setLoading(true);
     setTimeout(() => {
@@ -32,7 +39,8 @@ export default function HomeScreen() {
       resetForm();
     }, 1500);
   };
-
+  
+  // function to handle the datechange
   const handleDateChange = (event, selectedDate, setFieldValue) => {
     setShowDatePicker(false);
     if (selectedDate) {
@@ -106,6 +114,8 @@ export default function HomeScreen() {
   );
 }
 
+
+// styles for the feature
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
